@@ -6,9 +6,21 @@ Welcome to **Mobile Store**! This project is a complete e-commerce application f
 
 ## **Overview**
 
-| **Description**                               | **Application Image**               |
-|-----------------------------------------------|-------------------------------------|
-| Mobile Store is a fully functional e-commerce application built for mobile devices. It features user authentication, product management, a shopping cart, order processing, and an admin panel. The UI is optimized for seamless mobile experience. | ![App Screenshot](https://res.cloudinary.com/dgwr512qr/image/upload/v1732684255/owgqguwzhzsilmzhfbrt.png) |
+<table>
+  <tr>
+    <td rowspan="2">
+      <img src="https://res.cloudinary.com/dgwr512qr/image/upload/v1732684255/owgqguwzhzsilmzhfbrt.png" alt="App Screenshot" width="300">
+    </td>
+    <td>
+      <strong>Description:</strong> Mobile Store is a fully functional e-commerce application built for mobile devices. It features user authentication, product management, a shopping cart, order processing, and an admin panel.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Additional Info:</strong> The UI is optimized for a seamless mobile experience, ensuring user-friendly interactions and quick navigation.
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -35,4 +47,5 @@ Welcome to **Mobile Store**! This project is a complete e-commerce application f
 - **MongoDB** as the NoSQL database  
 - **Mongoose** for data modeling  
 - **JSON Web Tokens (JWT)** for authentication  
+
 
