@@ -8,11 +8,13 @@ import { AuthProvider } from "./context/AuthContext"
 import ProtectedRoute from "./ProtectedRoute"
 import { TaskProvider } from "./context/TaskContext"
 import Splash from "./pages/Splash"
+import { ProductProvider } from "./context/ProductContext"
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
+      <ProductProvider>
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Splash/>}/>
@@ -27,6 +29,7 @@ function App() {
           </Route>
         </Routes>
         </BrowserRouter>
+      </ProductProvider>
       </TaskProvider>
     </AuthProvider> 
   )

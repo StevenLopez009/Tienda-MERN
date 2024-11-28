@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useTasks } from "../context/TaskContext"
+import {useProducts} from "../context/ProductContext"
 import TaskCard from "../components/TaskCard"
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
@@ -7,13 +8,18 @@ import { Box, TextField, Typography } from "@mui/material";
 import Carousel from "../components/Carousel";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import shirtIcon from "../assets/shirt.png"
+import pantsIcon from "../assets/pants.png" 
+import dressIcon from "../assets/dress.png"
+import jacketIcon from "../assets/jacket.png"
+import Target from "../components/Target"
 
 function TaskPage(){
   const {getTasks, tasks}= useTasks()
+  const {getProducts, products} = useProducts()
   const { logout}= useAuth()
 
   useEffect(()=>{
-    getTasks()
+    getProducts()
   },[])
 
   return(
@@ -82,52 +88,76 @@ function TaskPage(){
           }}
         >
           <Box>
-    <Box
-      sx={{
-        backgroundColor: "pink",
-        borderRadius: "50px",
-        width: "60px",
-        height: "60px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center", // Centra el ícono dentro del círculo
-      }}
-    >
-      <img
-        src={shirtIcon}
-        alt=""
-        style={{
-          width: "40px", // Ajusta el ancho del ícono
-          height: "40px", // Ajusta la altura del ícono
-        }}
-      />
-    </Box>
-    <Typography sx={{ textAlign: "center", fontSize: "0.8rem" }}>
-      SHIRT
-    </Typography>
-  </Box>
-          <Box>
             <Box
               sx={{
-                backgroundColor: "pink",
+                backgroundColor: "#e3d5ca",
                 borderRadius: "50px",
                 width: "60px",
                 height: "60px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center", 
               }}
-            ></Box>
+            >
+              <img
+                src={shirtIcon}
+                alt=""
+                style={{
+                  width: "40px", 
+                  height: "40px", 
+                }}
+              />
+            </Box>
             <Typography sx={{ textAlign: "center", fontSize: "0.8rem" }}>
-              PANT
+              SHIRT
             </Typography>
           </Box>
           <Box>
             <Box
               sx={{
-                backgroundColor: "pink",
+                backgroundColor: "#e3d5ca",
                 borderRadius: "50px",
                 width: "60px",
                 height: "60px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center", 
               }}
-            ></Box>
+            >
+               <img
+                src={pantsIcon}
+                alt=""
+                style={{
+                  width: "40px", 
+                  height: "40px", 
+                }}
+              />
+            </Box>
+            <Typography sx={{ textAlign: "center", fontSize: "0.8rem" }}>
+              PANTS
+            </Typography>
+          </Box>
+          <Box>
+            <Box
+              sx={{
+                backgroundColor: "#e3d5ca",
+                borderRadius: "50px",
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center", 
+              }}
+            >
+               <img
+                src={dressIcon}
+                alt=""
+                style={{
+                  width: "40px", 
+                  height: "40px", 
+                }}
+              />
+            </Box>
             <Typography sx={{ textAlign: "center", fontSize: "0.8rem" }}>
               DRESS
             </Typography>
@@ -135,12 +165,24 @@ function TaskPage(){
           <Box>
             <Box
               sx={{
-                backgroundColor: "pink",
+                backgroundColor: "#e3d5ca",
                 borderRadius: "50px",
                 width: "60px",
                 height: "60px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center", 
               }}
-            ></Box>
+            >
+               <img
+                src={jacketIcon}
+                alt=""
+                style={{
+                  width: "40px", 
+                  height: "40px", 
+                }}
+              />
+            </Box>
             <Typography sx={{ textAlign: "center", fontSize: "0.8rem" }}>
               JACKET
             </Typography>
@@ -148,10 +190,10 @@ function TaskPage(){
         </Box>
         <Box>
       <Link to="/" onClick={()=>{logout()}}>Logout</Link>
-      {tasks.length === 0 ? (
-        <h1>No Tasks</h1>
+      {products.length === 0 ? (
+        <h1>No Products</h1>
       ) : (
-        <div>{tasks.map(task => <TaskCard task={task} key={task._id} />)}</div>
+        <div>{products.map(product => <Target product={product} key={product._id} />)}</div>
       )}
     </Box>
       </Box>
