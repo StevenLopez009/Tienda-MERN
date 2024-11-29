@@ -4,7 +4,7 @@ import {useProducts} from "../context/ProductContext"
 import TaskCard from "../components/TaskCard"
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
 import Carousel from "../components/Carousel";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import shirtIcon from "../assets/shirt.png"
@@ -189,11 +189,19 @@ function TaskPage(){
           </Box>
         </Box>
         <Box>
-      <Link to="/" onClick={()=>{logout()}}>Logout</Link>
+       {/* <Link to="/" onClick={() => { logout() }}>Logout</Link> */}
       {products.length === 0 ? (
         <h1>No Products</h1>
       ) : (
-        <div>{products.map(product => <Target product={product} key={product._id} />)}</div>
+        <Box sx={{ padding: "5px" }}>
+      <Grid container spacing={2}>
+        {products.map((product) => (
+          <Grid item xs={6} sm={6} key={product._id}>
+            <Target product={product} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
       )}
     </Box>
       </Box>
