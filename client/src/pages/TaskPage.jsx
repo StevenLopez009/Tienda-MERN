@@ -1,8 +1,6 @@
 import { useEffect } from "react"
 import { useTasks } from "../context/TaskContext"
 import {useProducts} from "../context/ProductContext"
-import TaskCard from "../components/TaskCard"
-import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
 import Carousel from "../components/Carousel";
