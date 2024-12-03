@@ -10,6 +10,7 @@ import pantsIcon from "../assets/pants.png"
 import dressIcon from "../assets/dress.png"
 import jacketIcon from "../assets/jacket.png"
 import Target from "../components/Target"
+import MenuNav from "../components/MenuNav";
 
 function TaskPage(){
   const {getTasks, tasks}= useTasks()
@@ -22,7 +23,7 @@ function TaskPage(){
 
   return(
     <>
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", paddingBottom: "100px"}}>
       <Box sx={{ margin: "0 auto", width: "90%" }}>
         <Box
           sx={{
@@ -199,6 +200,7 @@ function TaskPage(){
           </Grid>
         ))}
       </Grid>
+        <MenuNav/>
     </Box>
       )}
     </Box>
