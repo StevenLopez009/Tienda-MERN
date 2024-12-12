@@ -9,24 +9,27 @@ import { TaskProvider } from "./context/TaskContext"
 import Splash from "./pages/Splash"
 import { ProductProvider } from "./context/ProductContext"
 import ShoppinPage from "./pages/Shopping"
+import { CartProvider } from "./context/CartContext"
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
       <ProductProvider>
-        <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Splash/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route element={<ProtectedRoute/>}>
-            <Route path="/tasks" element={<TaskPage/>}/>
-            <Route path="/shopping" element={<ShoppinPage/>}/>
-            <Route path="/profile" element={<ProfilePage/>}/>
-          </Route>
-        </Routes>
-        </BrowserRouter>
+        <CartProvider>
+          <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Splash/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/register" element={<RegisterPage/>}/>
+            <Route element={<ProtectedRoute/>}>
+              <Route path="/tasks" element={<TaskPage/>}/>
+              <Route path="/shopping" element={<ShoppinPage/>}/>
+              <Route path="/profile" element={<ProfilePage/>}/>
+            </Route>
+          </Routes>
+          </BrowserRouter>
+        </CartProvider> 
       </ProductProvider>
       </TaskProvider>
     </AuthProvider> 

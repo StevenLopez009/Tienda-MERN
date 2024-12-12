@@ -1,8 +1,9 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTasks } from "../context/TaskContext"
 import {useProducts} from "../context/ProductContext"
 import { useAuth } from "../context/AuthContext"
 import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
+import { useCart } from '../context/CartContext';
 import Carousel from "../components/Carousel";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import shirtIcon from "../assets/shirt.png"
@@ -16,6 +17,7 @@ function TaskPage(){
   const {getTasks, tasks}= useTasks()
   const {getProducts, products} = useProducts()
   const { logout}= useAuth()
+  const { addToCart } = useCart();
 
   useEffect(()=>{
     getProducts()
@@ -196,7 +198,7 @@ function TaskPage(){
       <Grid container spacing={2}>
         {products.map((product) => (
           <Grid item xs={6} sm={6} key={product._id}>
-            <Target product={product} />
+            <Target product={product} addToCart={addToCart}/>
           </Grid>
         ))}
       </Grid>

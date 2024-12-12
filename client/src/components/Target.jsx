@@ -4,7 +4,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
-function Target({ product }) {
+function Target({ product , addToCart}) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -13,8 +13,6 @@ function Target({ product }) {
   const toggleDescription = () => setShowFullDescription(!showFullDescription);
   const maxDescriptionLength = 100; 
   const shortDescription = product.description.slice(0, maxDescriptionLength);
- 
-
   return (
     <>
       <Box
@@ -142,7 +140,6 @@ function Target({ product }) {
                       fontSize: 16,
                       backgroundColor: 'grey.100',
                       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', 
-                      
                     }}
                   >
                     {size}
@@ -196,7 +193,7 @@ function Target({ product }) {
                 backgroundColor: "#6e4a33",
                 color: "white",
                 borderRadius: "50px"
-              }}>Add to Cart</Button>
+              }} onClick={() => addToCart(product)}>Add to Cart</Button>
             </Box>
             </Box>
           </Box>
