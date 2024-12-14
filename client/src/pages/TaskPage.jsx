@@ -12,6 +12,7 @@ import dressIcon from "../assets/dress.png"
 import jacketIcon from "../assets/jacket.png"
 import Target from "../components/Target"
 import MenuNav from "../components/MenuNav";
+import CountDown from "../components/CountDown";
 
 function TaskPage(){
   const {getTasks, tasks}= useTasks()
@@ -191,6 +192,37 @@ function TaskPage(){
         </Box>
         <Box>
        {/* <Link to="/" onClick={() => { logout() }}>Logout</Link> */}
+       <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center', 
+          padding: '10px 20px', 
+          borderRadius: '8px', 
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#333' }}>
+          Store
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center', 
+            gap: '10px', 
+          }}
+        >
+          <Typography
+            sx={{
+              margin: '0',
+              fontSize: '16px',
+              color: '#555',
+            }}
+          >
+            Closing in
+          </Typography>
+          <CountDown />
+        </Box>
+    </Box>
       {products.length === 0 ? (
         <h1>No Products</h1>
       ) : (

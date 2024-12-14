@@ -1,6 +1,8 @@
 import { Box, Typography, Button } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link } from 'react-router-dom';
+
 
 function ShoppinPage() {
   const { cartItems } = useCart();
@@ -13,16 +15,16 @@ function ShoppinPage() {
           alignItems: "center",
           marginBottom: "40px",
         }}>
-          <ArrowBackIcon sx={{
-            marginRight: "10px", 
-          }} />
+          <Link to="/tasks" style={{ textDecoration: "none", color: "inherit" }}>
+              <ArrowBackIcon sx={{ marginRight: "10px", cursor: "pointer" }} />
+          </Link>
           <Typography variant='h6' sx={{
             flex: 1, 
             textAlign: "center",
           }}>
             My Cart
           </Typography>
-        </Box>
+      </Box>
       <Box>
         {cartItems.map((item) => (
           <Box key={item.id}>
@@ -39,8 +41,8 @@ function ShoppinPage() {
                 <img 
                   src={item.image}  
                   style={{
-                    width: "100%", 
-                    height: "80%", 
+                    width: "100px", 
+                    height: "150px", 
                     objectFit: "cover", 
                     borderRadius: "15px",
                     margin: "20px 0"

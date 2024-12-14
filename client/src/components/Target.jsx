@@ -18,11 +18,12 @@ function Target({ product , addToCart}) {
       <Box
         onClick={handleOpen} 
         sx={{
-          height: "25vh",
-          width: "100%",
+          width: "150px", 
+          height: "150px", 
+          aspectRatio: "1",
           display: "flex",
           flexDirection: "column",
-          margin: "20px 0"
+          margin: "30px auto", 
         }}
       >
           <img
