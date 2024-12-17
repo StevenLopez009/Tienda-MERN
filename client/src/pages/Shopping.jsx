@@ -42,7 +42,7 @@ function ShoppinPage() {
                   src={item.image}  
                   style={{
                     width: "100px", 
-                    height: "150px", 
+                    height: "15 0px", 
                     objectFit: "cover", 
                     borderRadius: "15px",
                     margin: "20px 0"

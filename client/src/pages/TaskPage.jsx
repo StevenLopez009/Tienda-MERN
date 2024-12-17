@@ -211,15 +211,6 @@ function TaskPage(){
             gap: '10px', 
           }}
         >
-          <Typography
-            sx={{
-              margin: '0',
-              fontSize: '16px',
-              color: '#555',
-            }}
-          >
-            Closing in
-          </Typography>
           <CountDown />
         </Box>
     </Box>
