@@ -19,7 +19,6 @@ export function ProductProvider ({children}){
     try {
       const res= await getProductsRequest()
       setProducts(res.data)
-      console.log(res.data)
     } catch (error) {
       console.log(error)
     }

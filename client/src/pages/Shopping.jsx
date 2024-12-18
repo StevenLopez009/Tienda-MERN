@@ -1,90 +1,91 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
+import CartItemCard from '../components/CartItemCard';
+import { useState } from 'react';
+import axios from 'axios';
 
 
 function ShoppinPage() {
   const { cartItems } = useCart();
+  const [grandTotal, setGrandTotal] = useState(0);
+  const [quantities, setQuantities] = useState({}); // Mantén las cantidades seleccionadas.
+
+  const handleTotalChange = (amount) => {
+    setGrandTotal((prevTotal) => prevTotal + amount);
+  };
+
+  const handleQuantityChange = (id, quantity) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: quantity,
+    }));
+  };
+
+  const handlePurchase = async () => {
+    try {
+      const purchaseData = cartItems.map((item) => ({
+        id: item.id,
+        quantity: quantities[item.id] || 0, // Usa la cantidad seleccionada o 0 por defecto.
+      })).filter((item) => item.quantity > 0);
+
+      console.log(item.id)
+      console.log("Productos para la compra:", purchaseData);
+      const response = await axios.post('http://localhost:3000/api/products/update-stock', purchaseData);
+
+      alert(response.data.message);
+    } catch (error) {
+      console.error("Error updating stock:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Error updating stock");
+    }
+  };
+
   return (
-    <Box sx={{
-      margin: "20px 20px"
-    }}>
-      <Box sx={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "40px",
-        }}>
-          <Link to="/tasks" style={{ textDecoration: "none", color: "inherit" }}>
-              <ArrowBackIcon sx={{ marginRight: "10px", cursor: "pointer" }} />
-          </Link>
-          <Typography variant='h6' sx={{
-            flex: 1, 
+    <Box sx={{ margin: "20px 20px" }}>
+      <Box sx={{ display: "flex", alignItems: "center", marginBottom: "40px" }}>
+        <Link to="/tasks" style={{ textDecoration: "none", color: "inherit" }}>
+          <ArrowBackIcon sx={{ marginRight: "10px", cursor: "pointer" }} />
+        </Link>
+        <Typography
+          variant="h6"
+          sx={{
+            flex: 1,
             textAlign: "center",
-          }}>
-            My Cart
-          </Typography>
+          }}
+        >
+          My Cart
+        </Typography>
       </Box>
       <Box>
         {cartItems.map((item) => (
-          <Box key={item.id}>
-            <Box sx={{
-              width: "95%",
-              height: "25vh", 
-              display: "flex",
-              alignItems: "center"
-            }}>
-              <Box sx={{
-                width: "30%", 
-                height: "100%", 
-              }}>
-                <img 
-                  src={item.image}  
-                  style={{
-                    width: "100px", 
-                    height: "15 0px", 
-                    objectFit: "cover", 
-                    borderRadius: "15px",
-                    margin: "20px 0"
-                  }} 
-                />
-              </Box>
-              <Box sx={{
-                margin: "0 20px "
-              }}>
-                <Typography>{item.name}</Typography>
-                <Typography>${item.price}</Typography>
-              </Box>
-              <Box sx={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "auto"
-              }}>
-                <Button 
-                  sx={{ minWidth: "30px", padding: "5px", margin: "0 5px", backgroundColor:"#dee2e6", color: "black", fontWeight: "800" }}
-                >
-                  -
-                </Button>
-                <Typography sx={{ minWidth: "30px", textAlign: "center" }}>0</Typography>
-                <Button 
-                  sx={{ minWidth: "30px", padding: "5px", margin: "0 5px" ,backgroundColor:"#6e4a33", color: "white", fontWeight: "800"}}
-                >
-                  +
-                </Button>
-              </Box>
-            </Box>
-            <hr style={{
-              border: "none",
-              borderTop: "1px solid #ccc",
-              margin: "5px 0"
-            }} />
-          </Box>
+          <CartItemCard
+            key={item.id}
+            item={item}
+            onTotalChange={handleTotalChange}
+            onQuantityChange={handleQuantityChange} // Pasa la función de cambio de cantidad.
+          />
         ))}
+        <Typography>Total General: ${grandTotal.toFixed(2)}</Typography>
+        <Button
+          sx={{
+            padding: "20px",
+            margin: "0 5px",
+            backgroundColor: "#6e4a33",
+            color: "white",
+            fontWeight: "800",
+            borderRadius: "50px",
+          }}
+          onClick={handlePurchase}
+        >
+          Comprar
+        </Button>
       </Box>
     </Box>
   );
 }
 
 export default ShoppinPage;
+
 
 
