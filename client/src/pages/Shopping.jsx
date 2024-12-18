@@ -25,21 +25,30 @@ function ShoppinPage() {
 
   const handlePurchase = async () => {
     try {
-      const purchaseData = cartItems.map((item) => ({
-        id: item.id,
-        quantity: quantities[item.id] || 0, // Usa la cantidad seleccionada o 0 por defecto.
-      })).filter((item) => item.quantity > 0);
-
-      console.log(item.id)
+      console.log("Estado de quantities:", quantities)
+      // Aseguramos de usar _id en lugar de id
+      const purchaseData = cartItems.map((item) => {
+        console.log("Procesando producto:", item); // Verifica que item tenga el formato esperado
+        return {
+          id: String(item._id), // Usar _id en lugar de id
+          quantity: quantities[item._id] || 0, // Asegúrate de usar _id aquí también
+        };
+      }).filter((item) => item.quantity > 0);
+  
       console.log("Productos para la compra:", purchaseData);
+  
+      // Realiza la solicitud a la API
       const response = await axios.post('http://localhost:3000/api/products/update-stock', purchaseData);
-
+  
+      // Muestra el mensaje de respuesta
       alert(response.data.message);
     } catch (error) {
-      console.error("Error updating stock:", error.response?.data || error.message);
+      console.error("Detalles del error:", error);
+      console.error("Respuesta del error:", error.response?.data);
       alert(error.response?.data?.message || "Error updating stock");
     }
   };
+  
 
   return (
     <Box sx={{ margin: "20px 20px" }}>
@@ -60,10 +69,10 @@ function ShoppinPage() {
       <Box>
         {cartItems.map((item) => (
           <CartItemCard
-            key={item.id}
+            key={item._id}
             item={item}
             onTotalChange={handleTotalChange}
-            onQuantityChange={handleQuantityChange} // Pasa la función de cambio de cantidad.
+            onQuantityChange={handleQuantityChange} 
           />
         ))}
         <Typography>Total General: ${grandTotal.toFixed(2)}</Typography>

@@ -30,45 +30,48 @@ export const updateProductStock = async (req, res) => {
     const purchaseItems = req.body;
 
     if (!Array.isArray(purchaseItems)) {
-      return res
-        .status(400)
-        .json({ message: "Invalid input format. Expected an array." });
+      return res.status(400).json({
+        message: "Invalid input format. Expected an array.",
+      });
     }
 
     const errors = [];
-    for (const item of purchaseItems) {
-      let product;
+    const updatePromises = purchaseItems.map(async (item) => {
       try {
-        product = await ProductModel.findById(item.id);
-      } catch (error) {
-        errors.push({ id: item.id, message: "Error finding product" });
-        continue;
-      }
+        const product = await ProductModel.findById(item.id);
 
-      if (!product) {
-        errors.push({ id: item.id, message: "Product not found" });
-        continue;
-      }
+        if (!product) {
+          errors.push({ id: item.id, message: "Product not found" });
+          return;
+        }
 
-      if (product.stock < item.quantity) {
-        errors.push({ id: item.id, message: "Not enough stock" });
-        continue;
-      }
+        if (product.stock < item.quantity) {
+          errors.push({ id: item.id, message: "Not enough stock" });
+          return;
+        }
 
-      product.stock -= item.quantity;
-      await product.save();
-    }
+        product.stock -= item.quantity;
+        await product.save();
+        console.log("Datos recibidos en el backend:", req.body);
+      } catch {
+        errors.push({ id: item.id, message: "Error processing product" });
+      }
+    });
+
+    await Promise.all(updatePromises);
 
     if (errors.length > 0) {
-      return res
-        .status(400)
-        .json({ message: "Some products could not be updated", errors });
+      return res.status(400).json({
+        message: "Some products could not be updated",
+        errors,
+      });
     }
 
     res.json({ message: "Stock updated successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error updating stock", error: error.message });
+    res.status(500).json({
+      message: "Error updating stock",
+      error: error.message,
+    });
   }
 };

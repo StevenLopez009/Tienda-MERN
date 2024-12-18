@@ -8,7 +8,7 @@ function CartItemCard({ item, onTotalChange ,onQuantityChange}) {
     const newCounter = counter + 1;
     setCounter(newCounter);
     onTotalChange(item.price); 
-    onQuantityChange(item.id, newCounter);
+    onQuantityChange(item._id, newCounter);
   };
 
   const decrementar = () => {
@@ -16,7 +16,7 @@ function CartItemCard({ item, onTotalChange ,onQuantityChange}) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       onTotalChange(-item.price);
-      onQuantityChange(item.id, newCounter); 
+      onQuantityChange(item._id, newCounter); 
     }
   };
 
