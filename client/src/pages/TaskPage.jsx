@@ -13,12 +13,22 @@ import jacketIcon from "../assets/jacket.png"
 import Target from "../components/Target"
 import MenuNav from "../components/MenuNav";
 import CountDown from "../components/CountDown";
+import FilterCategory from "../components/FilterCategory";
 
 function TaskPage(){
   const {getTasks, tasks}= useTasks()
   const {getProducts, products} = useProducts()
   const { logout}= useAuth()
   const { addToCart } = useCart();
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredProducts =
+  selectedCategory === "All"
+    ? products
+    : products.filter((product) =>
+        product.categories.includes(selectedCategory)
+      );
 
   useEffect(()=>{
     getProducts()
@@ -214,14 +224,19 @@ function TaskPage(){
           <CountDown />
         </Box>
     </Box>
+    <Box>
+      <FilterCategory 
+        selectedCategory={selectedCategory} 
+        onCategoryChange={setSelectedCategory} />
+    </Box>
       {products.length === 0 ? (
         <h1>No Products</h1>
       ) : (
         <Box sx={{ padding: "5px" }}>
       <Grid container spacing={2}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <Grid item xs={6} sm={6} key={product._id}>
-            <Target product={product} addToCart={addToCart}/>
+            <Target product={product} addToCart={addToCart} />
           </Grid>
         ))}
       </Grid>
