@@ -32,7 +32,7 @@ function MenuNav() {
         <ShoppingBagIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
       </Link>
       
-      <Link to="/tasks" style={{ textDecoration: 'none' }}>
+      <Link to="/favorite" style={{ textDecoration: 'none' }}>
         <FavoriteBorderIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
       </Link>
       

@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material";
-import { useState } from "react";
 
 function FilterCategory({ selectedCategory, onCategoryChange }) {
   const buttonStyle = (isActive) => ({
@@ -19,7 +18,7 @@ function FilterCategory({ selectedCategory, onCategoryChange }) {
   const categories = ["All", "Newest", "Popular", "Man", "Woman"];
 
   return (
-    <Box sx={{ display: "flex", gap: "8px", marginTop: "20px" }}>
+    <Box sx={{ display: "flex", gap: "8px", marginTop: "20px", overflow: "hidden" }}>
       {categories.map((category) => (
         <Button
           key={category}
@@ -34,5 +33,7 @@ function FilterCategory({ selectedCategory, onCategoryChange }) {
 }
 
 export default FilterCategory
+
+
 
 

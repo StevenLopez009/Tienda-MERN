@@ -13,7 +13,7 @@ const categories = [
 ];
 
 const iconContainerStyle = (isActive) => ({
-  backgroundColor: isActive ? "#704f38" : "#e3d5ca",
+  backgroundColor: isActive ? "white" : "#e3d5ca",
   borderRadius: "50px",
   width: "60px",
   height: "60px",

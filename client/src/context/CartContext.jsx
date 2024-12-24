@@ -4,10 +4,15 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [favItems, setFavItems]= useState([])
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
   };
+
+  const addToFav = (product)=>{
+    setFavItems([...favItems, product])
+  }
 
 const removeFromCart = (productId) => {
     setCartItems(cartItems.filter((item) => item.id !== productId));
@@ -23,6 +28,8 @@ const removeFromCart = (productId) => {
 
   const value = {
     cartItems,
+    favItems,
+    addToFav,
     addToCart,
     removeFromCart,
     updateQuantity,

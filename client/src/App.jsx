@@ -10,6 +10,7 @@ import Splash from "./pages/Splash"
 import { ProductProvider } from "./context/ProductContext"
 import ShoppinPage from "./pages/Shopping"
 import { CartProvider } from "./context/CartContext"
+import FavoritePage from "./pages/FavoritePage"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route element={<ProtectedRoute/>}>
               <Route path="/tasks" element={<TaskPage/>}/>
               <Route path="/shopping" element={<ShoppinPage/>}/>
+              <Route path="/favorite" element={<FavoritePage/>}/>
               <Route path="/profile" element={<ProfilePage/>}/>
             </Route>
           </Routes>

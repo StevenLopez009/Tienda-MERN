@@ -13,7 +13,7 @@ import SelectCategory from "../components/SelectCategory";
 
 function TaskPage(){
   const {getProducts, products} = useProducts()
-  const { addToCart } = useCart();
+  const { addToCart, addToFav } = useCart();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProducts =
@@ -115,7 +115,7 @@ function TaskPage(){
           <Grid container spacing={2}>
             {filteredProducts.map((product) => (
               <Grid item xs={6} sm={6} key={product._id}>
-                <Target product={product} addToCart={addToCart} />
+                <Target product={product} addToCart={addToCart} addToFav={addToFav}/>
               </Grid>
             ))}
           </Grid>
