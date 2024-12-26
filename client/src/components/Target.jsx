@@ -34,7 +34,7 @@ function Target({ product, addToCart, addToFav }) {
             top: 10,
             right: 10,
             fontSize: "2rem",
-            backgroundColor: isFavorited ? "#6e4a33" : "rgba(255, 255, 255, 0.42)", // Corregido
+            backgroundColor: isFavorited ? "#6e4a33" : "rgba(255, 255, 255, 0.42)",
             padding: "5px",
             borderRadius: "50%",
             color: isFavorited ? "white" : "#6e4a33",
@@ -94,10 +94,15 @@ function Target({ product, addToCart, addToFav }) {
                   top: "30px",
                   right: "30px",
                   fontSize: "2rem",
-                  backgroundColor: "white",
+                  backgroundColor: isFavorited ? "#6e4a33" : "rgba(255, 255, 255, 0.42)",
                   padding: "10px",
                   borderRadius: "50%",
-                  color: "#6e4a33",
+                  color: isFavorited ? "white" : "#6e4a33",
+                }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  addToFav(product);
+                  setIsFavorited(!isFavorited);
                 }}
               />
 

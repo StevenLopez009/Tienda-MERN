@@ -10,9 +10,14 @@ export const CartProvider = ({ children }) => {
     setCartItems([...cartItems, product]);
   };
 
-  const addToFav = (product)=>{
-    setFavItems([...favItems, product])
-  }
+  const addToFav = (product) => {
+    if (favItems.some((item) => item._id === product._id)) {
+      setFavItems(favItems.filter((item) => item._id !== product._id));
+    } else {
+      setFavItems([...favItems, product]);
+    }
+  };
+  
 
 const removeFromCart = (productId) => {
     setCartItems(cartItems.filter((item) => item.id !== productId));
