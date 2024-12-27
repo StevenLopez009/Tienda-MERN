@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import {useProducts} from "../context/ProductContext"
-import { useAuth } from "../context/AuthContext"
 import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
 import { useCart } from '../context/CartContext';
 import Carousel from "../components/Carousel";

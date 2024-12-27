@@ -5,7 +5,6 @@ import TaskPage from "./pages/TaskPage"
 import ProfilePage from "./pages/ProfilePage"
 import { AuthProvider } from "./context/AuthContext"
 import ProtectedRoute from "./ProtectedRoute"
-import { TaskProvider } from "./context/TaskContext"
 import Splash from "./pages/Splash"
 import { ProductProvider } from "./context/ProductContext"
 import ShoppinPage from "./pages/Shopping"
@@ -15,7 +14,6 @@ import FavoritePage from "./pages/FavoritePage"
 function App() {
   return (
     <AuthProvider>
-      <TaskProvider>
       <ProductProvider>
         <CartProvider>
           <BrowserRouter>
@@ -33,7 +31,6 @@ function App() {
           </BrowserRouter>
         </CartProvider> 
       </ProductProvider>
-      </TaskProvider>
     </AuthProvider> 
   )
 }
