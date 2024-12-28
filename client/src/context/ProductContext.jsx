@@ -1,7 +1,6 @@
 import {  createContext, useContext, useState } from "react";
 import { getProductsRequest, createProductRequest, getProductRequest } from "../api/product";
-import { getFavoriteRequest } from "../api/favorite";
-
+import { getFavoritesRequest } from "../api/favorite";
 const ProductContext = createContext()
 
 export const useProducts =()=>{
@@ -34,8 +33,17 @@ export function ProductProvider ({children}){
     return res.data
   }
 
+  const getFavorites = async (id) => {
+    try {
+      const res = await getFavoritesRequest(id);  
+      return res.data;  
+    } catch (error) {
+      console.error("Error fetching favorites:", error);
+    }
+  };
+  
   return(
-    <ProductContext.Provider value={{products, getProducts, createProduct, getProduct}}>
+    <ProductContext.Provider value={{products, getProducts, createProduct, getProduct, getFavorites}}>
       {children}
     </ProductContext.Provider>
   )

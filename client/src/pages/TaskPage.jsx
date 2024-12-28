@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import {useProducts} from "../context/ProductContext"
+import { useAuth } from "../context/AuthContext";
 import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
 import { useCart } from '../context/CartContext';
 import Carousel from "../components/Carousel";
@@ -11,8 +12,9 @@ import FilterCategory from "../components/FilterCategory";
 import SelectCategory from "../components/SelectCategory";
 
 function TaskPage(){
-  const {getProducts, products} = useProducts()
+  const {getProducts, products, getFavorites} = useProducts()
   const { addToCart, addToFav } = useCart();
+  const { user } = useAuth(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProducts =
@@ -23,10 +25,20 @@ function TaskPage(){
           category.toLowerCase() === selectedCategory.toLowerCase()
         )
       );
-
   useEffect(() => {
     getProducts();
   }, []);
+
+
+  useEffect(() => {
+    if (user) {
+      const fetchFavorites = async () => {
+        const userFavorites  = await getFavorites(user.id); 
+        console.log(userFavorites );
+      };
+      fetchFavorites();
+    }
+  }, [user, getFavorites]); 
 
   return(
     <>

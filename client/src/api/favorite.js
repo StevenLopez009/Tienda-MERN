@@ -1,3 +1,3 @@
 import axios from "./axios";
 
-export const getFavoriteRequest = (user) => axios.get("/products");
+export const getFavoritesRequest = (id) => axios.get(`/favorites/${id}`);

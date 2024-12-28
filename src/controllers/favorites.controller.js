@@ -5,16 +5,17 @@ import ProductModel from "../models/product.model.js";
 export const createFavorite = async (req, res) => {
   try {
     const { userId, productIds } = req.body;
-    const userIdObjectId = new mongoose.Types.ObjectId(userId);
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
     const productIdsObjectId = productIds.map(
       (productId) => new mongoose.Types.ObjectId(productId)
     );
-
     const newFavorite = new Favorite({
-      user: userIdObjectId,
+      user: userId,
       products: productIdsObjectId,
     });
-
     await newFavorite.save();
     res.status(201).json({ message: "Favorite created successfully!" });
   } catch (error) {
