@@ -1,5 +1,6 @@
 import {  createContext, useContext, useState } from "react";
 import { getProductsRequest, createProductRequest, getProductRequest } from "../api/product";
+import { getFavoriteRequest } from "../api/favorite";
 
 const ProductContext = createContext()
 
