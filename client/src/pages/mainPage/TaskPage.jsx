@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
-import {useProducts} from "../context/ProductContext"
-import { Box, Grid, Grid2, TextField, Typography } from "@mui/material";
-import { useCart } from '../context/CartContext';
-import Carousel from "../components/Carousel";
+import {useEffect, useState} from "react"
+import {useProducts} from "../../service/Product.service.jsx"
+import {Box, Grid, TextField, Typography} from "@mui/material";
+import {useCart} from '../../service/Cart.service.jsx';
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
-import Target from "../components/Target"
-import MenuNav from "../components/MenuNav";
-import CountDown from "../components/CountDown";
-import FilterCategory from "../components/FilterCategory";
-import SelectCategory from "../components/SelectCategory";
+import Carousel from "./components/Carousel.jsx";
+import Target from "../../components/Target.jsx"
+import MenuNav from "../../components/MenuNav.jsx";
+import CountDown from "./components/CountDown.jsx";
+import FilterCategory from "../../components/FilterCategory.jsx";
+import SelectCategory from "../../components/SelectCategory.jsx";
 
 function TaskPage(){
   const {getProducts, products} = useProducts()

@@ -1,11 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
-import MenuNav from "../components/MenuNav"
-import { useCart } from "../context/CartContext";
-import Target from "../components/Target";
+import MenuNav from "../../components/MenuNav.jsx"
+import { useCart } from "../../service/Cart.service.jsx";
+import Target from "../../components/Target.jsx";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
-import { useProducts } from "../context/ProductContext";
-import { useAuth } from "../context/AuthContext";
+import { useProducts } from "../../service/Product.service.jsx";
+import { useAuth } from "../../service/Auth.service.jsx";
 import { useEffect } from "react";
 
 function FavoritePage (){

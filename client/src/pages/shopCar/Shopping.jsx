@@ -1,8 +1,8 @@
 import { Box, Button, Typography } from '@mui/material';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../service/Cart.service.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
-import CartItemCard from '../components/CartItemCard';
+import CartItemCard from '../../components/CartItemCard.jsx';
 import { useState } from 'react';
 import axios from 'axios';
 

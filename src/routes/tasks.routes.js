@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authRequired } from "../middlewares/validateToken.js";
+import { authRequired } from "../utilities/middlewares/validateToken.js";
 import {
   getTask,
   getTasks,
@@ -7,8 +7,8 @@ import {
   updateTask,
   deleteTask,
 } from "../controllers/tasks.controller.js";
-import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTasSchema } from "../schemas/task.schema.js";
+import { validateSchema } from "../utilities/middlewares/validator.middleware.js";
+import { createTasSchema } from "../utilities/schemas/task.schema.js";
 
 const router = Router();
 

@@ -1,10 +1,10 @@
 import {  createContext, useContext, useState } from "react";
-import { getProductsRequest, createProductRequest, getProductRequest } from "../api/product";
-import { getFavoritesRequest } from "../api/favorite";
-const ProductContext = createContext()
+import { getProductsRequest, createProductRequest, getProductRequest } from "./api/product";
+import { getFavoritesRequest } from "./api/favorite";
+const ProductService = createContext()
 
 export const useProducts =()=>{
-  const context = useContext(ProductContext)
+  const context = useContext(ProductService)
 
   if(!context){
     throw new Error("UseProduct must be used within a TaskProvider")
@@ -43,8 +43,8 @@ export function ProductProvider ({children}){
   };
   
   return(
-    <ProductContext.Provider value={{products, getProducts, createProduct, getProduct, getFavorites}}>
+    <ProductService.Provider value={{products, getProducts, createProduct, getProduct, getFavorites}}>
       {children}
-    </ProductContext.Provider>
+    </ProductService.Provider>
   )
 }

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth";
+import { loginRequest, registerRequest, verifyTokenRequest } from "./api/auth";
 import Cookies from "js-cookie";
 
-const AuthContext = createContext();
+const AuthService = createContext();
 
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthService);
   if (!context) throw new Error("useAuth must be used within a AuthProvider");
   return context;
 };
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider
+    <AuthService.Provider
       value={{
         user,
         signup,
@@ -93,8 +93,8 @@ export const AuthProvider = ({ children }) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthService.Provider>
   );
 };
 
-export default AuthContext;
+export default AuthService;

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-const CartContext = createContext();
+const CartService = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -41,7 +41,7 @@ const removeFromCart = (productId) => {
     updateQuantity,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <CartService.Provider value={value}>{children}</CartService.Provider>;
 };
 
-export const useCart = () => useContext(CartContext);
+export const useCart = () => useContext(CartService);

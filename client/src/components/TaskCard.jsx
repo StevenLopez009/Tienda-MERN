@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useTasks } from "../context/TaskContext"
+import { useTasks } from "../service/TaskContext"
 
 function TaskCard({task}){
   const {deleteTask}= useTasks()
