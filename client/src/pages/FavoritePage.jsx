@@ -4,9 +4,27 @@ import { useCart } from "../context/CartContext";
 import Target from "../components/Target";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from "react-router-dom";
+import { useProducts } from "../context/ProductContext";
+import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 function FavoritePage (){
-  const { favItems,addToCart, addToFav } = useCart();
+  const { getFavorites} = useProducts()
+  const { user } = useAuth(); 
+  const { favItems,setFavItems, addToCart, addToFav } = useCart();
+
+  useEffect(() => {
+    if (user) {
+      const fetchFavorites = async () => {
+        const userFavorites  = await getFavorites(user.id); 
+        setFavItems(userFavorites)
+        console.log(favItems)
+      };
+      fetchFavorites();
+    }
+  }, [user, getFavorites]); 
+
+
   return(
     <>
     <Box sx={{ margin: "20px 20px" }}>
@@ -26,13 +44,19 @@ function FavoritePage (){
       </Box>
       <Box>
       <Box sx={{padding: "5px"}} >
-        <Grid container spacing={2}>
-          {favItems.map((product) => (
+      <Grid container spacing={2}>
+        {favItems.products && favItems.products.length > 0 ? (
+          favItems.products.map((product) => (
             <Grid item xs={6} sm={6} key={product._id}>
-              <Target product={product} addToCart={addToCart} addToFav={addToFav}/>
+              <Target product={product} addToCart={addToCart} addToFav={addToFav} />
             </Grid>
-          ))}
-        </Grid>
+          ))
+        ) : (
+          <Typography variant="body1" sx={{ textAlign: "center", margin: "20px auto" }}>
+            No products in your wishlist yet!
+          </Typography>
+        )}
+      </Grid>
       </Box>
       </Box>
       <MenuNav/>

@@ -34,6 +34,7 @@ const removeFromCart = (productId) => {
   const value = {
     cartItems,
     favItems,
+    setFavItems,
     addToFav,
     addToCart,
     removeFromCart,
