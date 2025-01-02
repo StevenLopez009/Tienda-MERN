@@ -12,8 +12,8 @@ export const getFavorites = async (req, res) => {
 
     if (!favorite) {
       return res
-          .status(404)
-          .json({ message: "Favorites not found for this profile" });
+        .status(404)
+        .json({ message: "Favorites not found for this profile" });
     }
 
     const productIds = favorite.products;
@@ -31,7 +31,7 @@ export const getFavorites = async (req, res) => {
   }
 };
 
-export const getFavoriteById = async (req, res) => {}
+export const getFavoriteById = async (req, res) => {};
 
 export const createFavorite = async (req, res) => {
   try {
@@ -40,22 +40,45 @@ export const createFavorite = async (req, res) => {
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
+
+    if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "Product IDs are required and must be an array" });
+    }
+
     const productIdsObjectId = productIds.map(
       (productId) => new mongoose.Types.ObjectId(productId)
     );
-    const newFavorite = new Favorite({
-      user: userId,
-      products: productIdsObjectId,
-    });
-    await newFavorite.save();
-    res.status(201).json({ message: "Favorite created successfully!" });
+
+    const existingFavorite = await Favorite.findOne({ user: userId });
+
+    if (existingFavorite) {
+      const newProducts = productIdsObjectId.filter(
+        (productId) => !existingFavorite.products.includes(productId.toString())
+      );
+
+      existingFavorite.products.push(...newProducts);
+      await existingFavorite.save();
+      return res
+        .status(200)
+        .json({ message: "Products added to favorites successfully!" });
+    } else {
+      const newFavorite = new Favorite({
+        user: userId,
+        products: productIdsObjectId,
+      });
+      await newFavorite.save();
+      return res
+        .status(201)
+        .json({ message: "Favorite created successfully!" });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error creating favorite" });
+    res.status(500).json({ message: "Error creating or updating favorite" });
   }
 };
 
-export const updateFavorite = async (req, res) => {}
+export const updateFavorite = async (req, res) => {};
 
-export const deleteFavorite = async (req, res) => {}
-
+export const deleteFavorite = async (req, res) => {};

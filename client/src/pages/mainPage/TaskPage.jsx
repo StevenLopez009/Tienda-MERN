@@ -9,10 +9,12 @@ import MenuNav from "../../components/MenuNav.jsx";
 import CountDown from "./components/CountDown.jsx";
 import FilterCategory from "../../components/FilterCategory.jsx";
 import SelectCategory from "../../components/SelectCategory.jsx";
+import { useAuth } from "../../service/Auth.service.jsx";
 
 function TaskPage(){
-  const {getProducts, products} = useProducts()
-  const { addToCart, addToFav } = useCart();
+  const {getProducts, products, createFavorite} = useProducts()
+  const { addToCart } = useCart();
+  const { user } = useAuth(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProducts =
@@ -113,7 +115,12 @@ function TaskPage(){
           <Grid container spacing={2}>
             {filteredProducts.map((product) => (
               <Grid item xs={6} sm={6} key={product._id}>
-                <Target product={product} addToCart={addToCart} addToFav={addToFav}/>
+                <Target 
+                  product={product} 
+                  addToCart={addToCart} 
+                  addToFav={(userId, productIds) => createFavorite(userId, productIds)}
+                  userId={user.id} 
+                />
               </Grid>
             ))}
           </Grid>

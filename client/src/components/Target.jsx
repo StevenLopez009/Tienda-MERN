@@ -3,7 +3,7 @@ import { Box, Typography, Modal, Backdrop, Fade, Button } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function Target({ product, addToCart, addToFav }) {
+function Target({ product, addToCart, addToFav, userId }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false); 
   const [open, setOpen] = useState(false);
@@ -13,6 +13,13 @@ function Target({ product, addToCart, addToFav }) {
   const toggleDescription = () => setShowFullDescription(!showFullDescription);
   const maxDescriptionLength = 100; 
   const shortDescription = product.description.slice(0, maxDescriptionLength);
+
+  const handleFavoriteClick = (event) => {
+    addToFav(userId, [product._id]); 
+    setIsFavorited(!isFavorited);
+    console.log("userId:", userId); 
+    console.log("productIds:", product._id); 
+  };
 
   return (
     <>
@@ -42,8 +49,7 @@ function Target({ product, addToCart, addToFav }) {
           }}
           onClick={(event) => {
             event.stopPropagation();
-            addToFav(product);
-            setIsFavorited(!isFavorited);
+            handleFavoriteClick()
           }}
         />
         <img
