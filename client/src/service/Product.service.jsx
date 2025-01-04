@@ -1,6 +1,6 @@
 import {  createContext, useContext, useState } from "react";
 import { getProductsRequest, createProductRequest, getProductRequest } from "./api/product";
-import { getFavoritesRequest, createFavoriteRequest } from "./api/favorite";
+import { getFavoritesRequest, createFavoriteRequest, deleteFavoriteRequest } from "./api/favorite";
 const ProductService = createContext()
 
 export const useProducts =()=>{
@@ -50,10 +50,18 @@ export function ProductProvider ({children}){
       console.error("Error creating favorite:", error);
     }
   };
-  
+
+  const deleteFavorite = async (id, idProduct)=>{
+    try {
+      const res = await deleteFavoriteRequest(id, idProduct);
+      return res.data
+    } catch (error) {
+      console.log("Error Deleting favorite")
+    }
+  }
   
   return(
-    <ProductService.Provider value={{products, getProducts, createProduct, getProduct, getFavorites, createFavorite}}>
+    <ProductService.Provider value={{products, getProducts, createProduct, getProduct, getFavorites, createFavorite, deleteFavorite}}>
       {children}
     </ProductService.Provider>
   )

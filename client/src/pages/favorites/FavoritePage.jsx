@@ -9,9 +9,9 @@ import { useAuth } from "../../service/Auth.service.jsx";
 import { useEffect } from "react";
 
 function FavoritePage (){
-  const { getFavorites} = useProducts()
+  const { getFavorites, deleteFavorite,createFavorite} = useProducts()
   const { user } = useAuth(); 
-  const { favItems,setFavItems, addToCart, addToFav } = useCart();
+  const { favItems,setFavItems, addToCart,  } = useCart();
 
   useEffect(() => {
     if (user) {
@@ -48,7 +48,7 @@ function FavoritePage (){
         {favItems.products && favItems.products.length > 0 ? (
           favItems.products.map((product) => (
             <Grid item xs={6} sm={6} key={product._id}>
-              <Target product={product} addToCart={addToCart} addToFav={addToFav} />
+              <Target product={product} addToCart={addToCart} createFavorite={createFavorite} deleteFavorite={deleteFavorite}/>
             </Grid>
           ))
         ) : (

@@ -12,7 +12,7 @@ import SelectCategory from "../../components/SelectCategory.jsx";
 import { useAuth } from "../../service/Auth.service.jsx";
 
 function TaskPage(){
-  const {getProducts, products, createFavorite} = useProducts()
+  const {getProducts, products, createFavorite, deleteFavorite} = useProducts()
   const { addToCart } = useCart();
   const { user } = useAuth(); 
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -118,8 +118,9 @@ function TaskPage(){
                 <Target 
                   product={product} 
                   addToCart={addToCart} 
-                  addToFav={(userId, productIds) => createFavorite(userId, productIds)}
+                  createFavorite={createFavorite}
                   userId={user.id} 
+                  deleteFavorite={deleteFavorite}
                 />
               </Grid>
             ))}

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Box, Typography, Modal, Backdrop, Fade, Button } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function Target({ product, addToCart, addToFav, userId }) {
+function Target({ product, addToCart, createFavorite, userId, deleteFavorite }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false); 
   const [open, setOpen] = useState(false);
@@ -14,11 +15,18 @@ function Target({ product, addToCart, addToFav, userId }) {
   const maxDescriptionLength = 100; 
   const shortDescription = product.description.slice(0, maxDescriptionLength);
 
-  const handleFavoriteClick = (event) => {
-    addToFav(userId, [product._id]); 
-    setIsFavorited(!isFavorited);
-    console.log("userId:", userId); 
-    console.log("productIds:", product._id); 
+  const handleFavoriteClick = async (event) => {
+    try {
+      if (isFavorited) {
+        await deleteFavorite(userId, product._id);
+      } else {
+        await createFavorite(userId, [product._id]);
+      }
+      setIsFavorited(!isFavorited);
+    } catch (error) {
+      toast.error("Ocurrió un error al actualizar favoritos");
+      console.error("Error managing favorite:", error.message);
+    }
   };
 
   return (
@@ -35,23 +43,43 @@ function Target({ product, addToCart, addToFav, userId }) {
           position: "relative", 
         }}
       >
-        <FavoriteBorderIcon
-          sx={{
-            position: "absolute",
-            top: 10,
-            right: 10,
-            fontSize: "2rem",
-            backgroundColor: isFavorited ? "#6e4a33" : "rgba(255, 255, 255, 0.42)",
-            padding: "5px",
-            borderRadius: "50%",
-            color: isFavorited ? "white" : "#6e4a33",
-            zIndex: 100,
-          }}
-          onClick={(event) => {
-            event.stopPropagation();
-            handleFavoriteClick()
-          }}
-        />
+        {isFavorited ? (
+          <FavoriteBorderIcon
+            sx={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              fontSize: "2rem",
+              backgroundColor: "#6e4a33",
+              padding: "5px",
+              borderRadius: "50%",
+              color: "white",
+              zIndex: 100,
+            }}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleFavoriteClick(); // Cambiar a deleteFavorite
+            }}
+          />
+        ) : (
+          <RemoveCircleIcon
+            sx={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              fontSize: "2rem",
+              backgroundColor: "rgba(255, 255, 255, 0.42)",
+              padding: "5px",
+              borderRadius: "50%",
+              color: "#6e4a33",
+              zIndex: 100,
+            }}
+            onClick={(event) => {
+              event.stopPropagation();
+              handleFavoriteClick(); // Cambiar a createFavorite
+            }}
+          />
+        )}
         <img
           src={product.image}
           alt={`Imagen de ${product.name}`}
@@ -229,5 +257,6 @@ function Target({ product, addToCart, addToFav, userId }) {
 }
 
 export default Target;
+
 
 

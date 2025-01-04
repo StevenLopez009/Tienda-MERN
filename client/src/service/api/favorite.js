@@ -6,3 +6,10 @@ export const createFavoriteRequest = (id, idProductArray) =>
     userId: id,
     productIds: idProductArray,
   });
+
+export const deleteFavoriteRequest = (id, idProduct) => {
+  axios.delete("/delete", {
+    userId: id,
+    productIds: idProduct,
+  });
+};

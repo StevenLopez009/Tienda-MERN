@@ -79,6 +79,22 @@ export const createFavorite = async (req, res) => {
   }
 };
 
-export const updateFavorite = async (req, res) => {};
+export const deleteFavorite = async (req, res) => {
+  try {
+    const { userId, productIds } = req.body;
+    const userIdObjectId = new mongoose.Types.ObjectId(userId);
+    const productIdObjectId = new mongoose.Types.ObjectId(productIds);
+    const favorite = await Favorite.findOne({ user: userIdObjectId });
 
-export const deleteFavorite = async (req, res) => {};
+    favorite.products = favorite.products.filter(
+      (id) => !id.equals(productIdObjectId)
+    );
+    await favorite.save();
+    res
+      .status(200)
+      .json({ message: "Product removed from favorites", favorite });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error removing product from favorites" });
+  }
+};
