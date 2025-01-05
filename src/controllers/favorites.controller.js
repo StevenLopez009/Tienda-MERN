@@ -20,18 +20,12 @@ export const getFavorites = async (req, res) => {
 
     const products = await ProductModel.find({ _id: { $in: productIds } });
 
-    if (!products.length) {
-      return res.status(404).json({ message: "No products found" });
-    }
-
     res.status(200).json({ products });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching favorites" });
   }
 };
-
-export const getFavoriteById = async (req, res) => {};
 
 export const createFavorite = async (req, res) => {
   try {
@@ -81,20 +75,22 @@ export const createFavorite = async (req, res) => {
 
 export const deleteFavorite = async (req, res) => {
   try {
-    const { userId, productIds } = req.body;
-    const userIdObjectId = new mongoose.Types.ObjectId(userId);
-    const productIdObjectId = new mongoose.Types.ObjectId(productIds);
-    const favorite = await Favorite.findOne({ user: userIdObjectId });
-
+    const { userId, productIds } = req.body; 
+    if (!userId || !productIds) {
+      return res.status(400).json({ message: "userId and productIds are required" });
+    }
+    const favorite = await Favorite.findOne({ user: userId });
     favorite.products = favorite.products.filter(
-      (id) => !id.equals(productIdObjectId)
+      (id) => !productIds.includes(id.toString())
     );
     await favorite.save();
-    res
-      .status(200)
-      .json({ message: "Product removed from favorites", favorite });
+
+    res.status(200).json({
+      message: "Product removed from favorites",
+      favorite,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error removing product from favorites" });
+    console.error("Error in deleteFavorite:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
