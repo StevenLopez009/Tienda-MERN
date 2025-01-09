@@ -13,8 +13,14 @@ export const getImage = async (req, res) => {
     // Verifica si la imagen existe
     await fs.access(imagePath);
 
-    // Retorna el path de la imagen
-    res.status(200).json({ filePath: `/uploads/${userId}.jpg` });
+    // Lee el archivo como buffer
+    const fileBuffer = await fs.readFile(imagePath);
+
+    // Convierte a Base64
+    const base64Image = fileBuffer.toString("base64");
+
+    // Retorna la imagen en Base64
+    res.status(200).json({ base64: base64Image });
   } catch (error) {
     console.error(error);
     if (error.code === "ENOENT") {
@@ -24,5 +30,6 @@ export const getImage = async (req, res) => {
     }
   }
 };
+
 
 

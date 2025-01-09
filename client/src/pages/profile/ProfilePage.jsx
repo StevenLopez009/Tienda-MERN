@@ -11,8 +11,8 @@ const ProfilePage = () => {
     if (user?.id) {
       getImageRequest(user.id)
         .then((response) => {
-          setImageUrl(response.filePath);
-          console.log(imageUrl)
+          const base64Image = `data:image/jpg;base64,${response.data.base64}`;
+          setImageUrl(base64Image);
         })
         .catch((error) => {
           console.error("Error fetching image:", error);
@@ -27,18 +27,18 @@ const ProfilePage = () => {
 
     if (fileInput.files.length > 0) {
       formData.append("imageProfile", fileInput.files[0]);
-
       try {
         await createImageRequest(formData, user.id);
-        setImageUrl(`/uploads/${fileInput.files[0].name}`);
-        console.log("Image uploaded successfully");
+        const response = await getImageRequest(user.id);
+        setImageUrl(response.data.base64);
       } catch (error) {
-        console.error("Error uploading image:", error);
+        console.error("Error uploading or fetching image:", error);
       }
     } else {
       console.error("No file selected");
     }
   };
+
 
   return (
     <div>
@@ -57,7 +57,7 @@ const ProfilePage = () => {
         <img
           src={imageUrl}
           alt="User profile"
-          style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+          style={{ width: "450px", height: "450px", objectFit: "contain" }}
         />
       ) : (
         <p>No image available</p>
