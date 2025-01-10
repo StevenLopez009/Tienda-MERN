@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../service/Auth.service.jsx";
 import { createImageRequest, getImageRequest } from "../../service/api/image.js";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import portada from "../../assets/portada.jpg";
-import { set } from "mongoose";
 import MenuNav from "../../components/MenuNav.jsx";
+import defaultImg from "../../assets/defaultimageperfil.webp";
+import AddIcon from "@mui/icons-material/Add";
 
 const ProfilePage = () => {
   const { logout, user } = useAuth();
@@ -50,51 +51,108 @@ const ProfilePage = () => {
     <Box sx={{
       position: "relative",
     }}>
-      <Box sx={{
-        maxHeight: "180px",
-        width: "100%",
-        overflow: "hidden",
-      }}>
-        <img src={portada} alt="" />
+      <Box
+        sx={{
+          maxHeight: "180px",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <img
+          src={portada}
+          alt=""
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
+        />
       </Box>
-      <Box >
-        <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            id="imageProfile"
-            name="imageProfile"
-            accept="image/*"
-          />
-          <button type="submit">Upload</button>
-        </form>
-      </Box>
-      <Box sx={{
-        position: "absolute",
-        top: "50%",
-      }}>
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          padding: "10px",
+        }}
+      >
         {imageUrl ? (
           <>
             <img
               src={imageUrl}
               alt="User profile"
-              style={{ width: "150px", height: "150px", objectFit: "contain", borderRadius: "50%" }}
+              style={{
+                width: "150px",
+                height: "150px",
+                objectFit: "contain",
+                borderRadius: "50%",
+              }}
             />
-            <Typography marginTop="20px" variant="h5" align="center">{user.username}</Typography>
+            <Typography marginTop="20px" variant="h5" align="left">
+              {user.username}
+            </Typography>
+            <Typography>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Typography>
+            <Box sx={{ marginTop: "10px" }}>
+              <Link to="/client/public" onClick={() => logout()}>
+                Logout
+              </Link>
+            </Box>
           </>
-
         ) : (
-          <p>No image available</p>
+          <img
+            src={defaultImg}
+            alt="User profile"
+            style={{
+              width: "150px",
+              height: "150px",
+              objectFit: "contain",
+              borderRadius: "50%",
+            }}
+          />
         )}
       </Box>
+
       <Box sx={{
-        paddingTop: "200px",
+        position: "absolute",
+        top: "60%",
+        left: "50%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
       }}>
-        <Link to="/client/public" onClick={() => logout()} >
-          Logout
-        </Link>
-      </Box>
-      <MenuNav />
-    </Box >
+        <form onSubmit={handleSubmit}>
+          <Button
+            variant="contained"
+            component="label"
+            startIcon={<AddIcon />}
+            sx={{
+              backgroundColor: "#6e4a33",
+              color: "#fff",
+              margin: "10px",
+              height: "40px",
+              textAlign: "center"
+            }}
+          >
+            <input
+              type="file"
+              id="imageProfile"
+              name="imageProfile"
+              accept="image/*"
+              hidden
+            />
+          </Button>
+          <Button type="submit" sx={{
+            backgroundColor: "#6e4a33",
+            color: "#fff",
+
+          }}>Subir</Button>
+        </form>
+        <MenuNav />
+      </Box >
+    </Box>
+
   );
 };
 
