@@ -13,7 +13,6 @@ const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [visible, setVisible] = useState(false);
 
-
   useEffect(() => {
     if (user?.id) {
       getImageRequest(user.id)
@@ -28,7 +27,6 @@ const ProfilePage = () => {
   }, [user?.id]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const formData = new FormData();
     const fileInput = e.target.imageProfile;
 
@@ -74,6 +72,7 @@ const ProfilePage = () => {
           position: "absolute",
           top: "50%",
           padding: "10px",
+          margin: "0px 5px",
         }}
       >
         {imageUrl ? (
@@ -91,7 +90,9 @@ const ProfilePage = () => {
             <Typography marginTop="20px" variant="h5" align="left">
               {user.username}
             </Typography>
-            <Typography>
+            <Typography sx={{
+              textAlign: "justify",
+            }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Typography>
             <Box sx={{ marginTop: "10px" }}>
@@ -121,6 +122,7 @@ const ProfilePage = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
+        marginTop: "80px",
       }}>
         <form onSubmit={handleSubmit}>
           <Button
@@ -146,7 +148,6 @@ const ProfilePage = () => {
           <Button type="submit" sx={{
             backgroundColor: "#6e4a33",
             color: "#fff",
-
           }}>Subir</Button>
         </form>
         <MenuNav />
