@@ -7,6 +7,8 @@ import portada from "../../assets/portada.jpg";
 import MenuNav from "../../components/MenuNav.jsx";
 import defaultImg from "../../assets/defaultimageperfil.webp";
 import AddIcon from "@mui/icons-material/Add";
+import LogoutIcon from '@mui/icons-material/Logout';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const ProfilePage = () => {
   const { logout, user } = useAuth();
@@ -92,14 +94,44 @@ const ProfilePage = () => {
             </Typography>
             <Typography sx={{
               textAlign: "justify",
+              margin: "20px 0px",
             }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Typography>
-            <Box sx={{ marginTop: "10px" }}>
-              <Link to="/client/public" onClick={() => logout()}>
-                Logout
-              </Link>
+            <hr />
+            <Box
+              sx={{
+                marginTop: 2,
+                display: "flex",
+                width: "90%",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <LogoutIcon fontSize="small" color="primary" />
+                <Link
+                  to="/client/public"
+                  onClick={() => logout()}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    fontWeight: 500,
+                  }}
+                >
+                  Logout
+                </Link>
+              </Box>
+              <ArrowForwardIosIcon fontSize="small" color="action" />
             </Box>
+            <hr />
           </>
         ) : (
           <img

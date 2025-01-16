@@ -127,8 +127,6 @@ function Target({ product, addToCart, createFavorite, userId, deleteFavorite, is
             }}
           >
             <Box sx={{ position: "relative" }}>
-
-
               <ArrowBackIcon
                 sx={{
                   position: "absolute",

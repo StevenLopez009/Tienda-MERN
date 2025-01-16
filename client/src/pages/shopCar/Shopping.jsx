@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useCart } from '../../service/Cart.service.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import CartItemCard from '../../components/CartItemCard.jsx';
 import { useState } from 'react';
@@ -10,7 +11,7 @@ import axios from 'axios';
 function ShoppinPage() {
   const { cartItems } = useCart();
   const [grandTotal, setGrandTotal] = useState(0);
-  const [quantities, setQuantities] = useState({}); // Mantén las cantidades seleccionadas.
+  const [quantities, setQuantities] = useState({});
 
   const handleTotalChange = (amount) => {
     setGrandTotal((prevTotal) => prevTotal + amount);
@@ -26,21 +27,16 @@ function ShoppinPage() {
   const handlePurchase = async () => {
     try {
       console.log("Estado de quantities:", quantities)
-      // Aseguramos de usar _id en lugar de id
       const purchaseData = cartItems.map((item) => {
-        console.log("Procesando producto:", item); // Verifica que item tenga el formato esperado
+        console.log("Procesando producto:", item);
         return {
-          id: String(item._id), // Usar _id en lugar de id
-          quantity: quantities[item._id] || 0, // Asegúrate de usar _id aquí también
+          id: String(item._id),
+          quantity: quantities[item._id] || 0,
         };
       }).filter((item) => item.quantity > 0);
-  
+
       console.log("Productos para la compra:", purchaseData);
-  
-      // Realiza la solicitud a la API
       const response = await axios.post('http://localhost:3000/api/products/update-stock', purchaseData);
-  
-      // Muestra el mensaje de respuesta
       alert(response.data.message);
     } catch (error) {
       console.error("Detalles del error:", error);
@@ -48,7 +44,7 @@ function ShoppinPage() {
       alert(error.response?.data?.message || "Error updating stock");
     }
   };
-  
+
 
   return (
     <Box sx={{ margin: "20px 20px" }}>
@@ -72,7 +68,7 @@ function ShoppinPage() {
             key={item._id}
             item={item}
             onTotalChange={handleTotalChange}
-            onQuantityChange={handleQuantityChange} 
+            onQuantityChange={handleQuantityChange}
           />
         ))}
         <Typography>Total General: ${grandTotal.toFixed(2)}</Typography>

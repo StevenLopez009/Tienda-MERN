@@ -1,13 +1,16 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-function CartItemCard({ item, onTotalChange ,onQuantityChange}) {
-  const [counter, setCounter]= useState(0)
+function CartItemCard({ item, onTotalChange, onQuantityChange, onRemove }) {
+  const [counter, setCounter] = useState(0);
+  const [isSwiped, setIsSwiped] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(null);
 
   const incrementar = () => {
     const newCounter = counter + 1;
     setCounter(newCounter);
-    onTotalChange(item.price); 
+    onTotalChange(item.price);
     onQuantityChange(item._id, newCounter);
   };
 
@@ -16,48 +19,71 @@ function CartItemCard({ item, onTotalChange ,onQuantityChange}) {
       const newCounter = counter - 1;
       setCounter(newCounter);
       onTotalChange(-item.price);
-      onQuantityChange(item._id, newCounter); 
+      onQuantityChange(item._id, newCounter);
     }
   };
 
   const total = counter * item.price;
 
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX !== null) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const swipeDistance = touchStartX - touchEndX;
+
+      if (Math.abs(swipeDistance) > 50) {
+        setIsSwiped(swipeDistance > 0);
+      }
+    }
+    setTouchStartX(null);
+  };
+
   return (
-    <Box key={item.id}>
+    <Box
+      key={item.id}
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: "35vh",
+        marginBottom: 2,
+        transition: "transform 0.3s ease",
+        transform: isSwiped ? "translateX(-100px)" : "translateX(0)",
+        backgroundColor: "white",
+        borderRadius: "8px",
+      }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <Box
         sx={{
-          width: "95%",
-          height: "25vh",
           display: "flex",
           alignItems: "center",
+          padding: "10px",
         }}
       >
         <Box
           sx={{
             width: "30%",
-            height: "100%",
+            height: "100%"
           }}
         >
           <img
             src={item.image}
             style={{
               width: "100px",
-              height: "150px",
+              height: "180px",
               objectFit: "cover",
               borderRadius: "15px",
-              margin: "20px 0",
             }}
           />
         </Box>
-        <Box
-          sx={{
-            margin: "0 20px ",
-          }}
-        >
+        <Box sx={{ margin: "0 20px" }}>
           <Typography>{item.name}</Typography>
           <Typography>${item.price}</Typography>
         </Box>
-
         <Box
           sx={{
             display: "flex",
@@ -96,25 +122,19 @@ function CartItemCard({ item, onTotalChange ,onQuantityChange}) {
           </Button>
         </Box>
       </Box>
-       <Box
+      <Box
         sx={{
           display: "flex",
           justifyContent: "flex-end",
+          paddingRight: "10px",
         }}
       >
-        <Typography sx={{fontSize:"18px"}}>
-          Total: ${total.toFixed(2)}
-        </Typography>
+        <Typography sx={{ fontSize: "18px" }}>Total: ${total.toFixed(2)}</Typography>
       </Box>
-      <hr
-        style={{
-          border: "none",
-          borderTop: "1px solid #ccc",
-          margin: "5px 0",
-        }}
-      />
     </Box>
   );
 }
 
 export default CartItemCard;
+
+
