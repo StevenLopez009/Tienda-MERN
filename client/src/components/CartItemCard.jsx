@@ -1,11 +1,15 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useState } from "react";
+import { useCart } from "../service/Cart.service.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useProducts } from "../service/Product.service";
 
-function CartItemCard({ item, onTotalChange, onQuantityChange, onRemove }) {
+function CartItemCard({ item, onTotalChange, onQuantityChange }) {
+  const { products } = useProducts();
   const [counter, setCounter] = useState(0);
   const [isSwiped, setIsSwiped] = useState(false);
   const [touchStartX, setTouchStartX] = useState(null);
+  const { removeFromCart } = useCart();
 
   const incrementar = () => {
     const newCounter = counter + 1;
@@ -84,6 +88,7 @@ function CartItemCard({ item, onTotalChange, onQuantityChange, onRemove }) {
           <Typography>{item.name}</Typography>
           <Typography>${item.price}</Typography>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -121,6 +126,18 @@ function CartItemCard({ item, onTotalChange, onQuantityChange, onRemove }) {
             +
           </Button>
         </Box>
+        {isSwiped && (
+          <DeleteIcon
+            sx={{
+              position: "absolute",
+              right: "-80px",
+              top: "80px",
+              cursor: "pointer",
+              fontSize: "2.5rem",
+            }}
+            onClick={() => removeFromCart(item._id)}
+          />
+        )}
       </Box>
       <Box
         sx={{
@@ -129,12 +146,13 @@ function CartItemCard({ item, onTotalChange, onQuantityChange, onRemove }) {
           paddingRight: "10px",
         }}
       >
-        <Typography sx={{ fontSize: "18px" }}>Total: ${total.toFixed(2)}</Typography>
+        <Typography sx={{ fontSize: "18px" }}>subtotal: ${total.toFixed(2)}</Typography>
       </Box>
     </Box>
   );
 }
 
 export default CartItemCard;
+
 
 

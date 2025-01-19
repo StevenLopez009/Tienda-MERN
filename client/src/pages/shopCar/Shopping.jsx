@@ -5,8 +5,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 import CartItemCard from '../../components/CartItemCard.jsx';
 import { useState } from 'react';
-import axios from 'axios';
-
 
 function ShoppinPage() {
   const { cartItems } = useCart();
@@ -22,27 +20,6 @@ function ShoppinPage() {
       ...prevQuantities,
       [id]: quantity,
     }));
-  };
-
-  const handlePurchase = async () => {
-    try {
-      console.log("Estado de quantities:", quantities)
-      const purchaseData = cartItems.map((item) => {
-        console.log("Procesando producto:", item);
-        return {
-          id: String(item._id),
-          quantity: quantities[item._id] || 0,
-        };
-      }).filter((item) => item.quantity > 0);
-
-      console.log("Productos para la compra:", purchaseData);
-      const response = await axios.post('http://localhost:3000/api/products/update-stock', purchaseData);
-      alert(response.data.message);
-    } catch (error) {
-      console.error("Detalles del error:", error);
-      console.error("Respuesta del error:", error.response?.data);
-      alert(error.response?.data?.message || "Error updating stock");
-    }
   };
 
 
@@ -81,7 +58,6 @@ function ShoppinPage() {
             fontWeight: "800",
             borderRadius: "50px",
           }}
-          onClick={handlePurchase}
         >
           Comprar
         </Button>
