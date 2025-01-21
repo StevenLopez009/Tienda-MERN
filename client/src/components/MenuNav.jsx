@@ -4,9 +4,45 @@ import HomeIcon from '@mui/icons-material/Home';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ChatIcon from '@mui/icons-material/Chat';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+const NavItem = ({ icon: Icon, isSelected, onClick }) => (
+  <Box
+    sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}
+    onClick={onClick}
+  >
+    {isSelected && (
+      <Box
+        sx={{
+          position: "absolute",
+          width: "50px",
+          height: "50px",
+          borderRadius: "50%",
+          backgroundColor: "white",
+          top: "-10px",
+          right: "-10px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Icon sx={{ color: "#1c1c1c", fontSize: "2rem" }} />
+      </Box>
+    )}
+    <Icon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
+  </Box>
+);
 
 function MenuNav() {
+  const [selected, setSelected] = useState("");
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    setSelected(path);
+    navigate(path);
+  };
+
   return (
     <Box
       sx={{
@@ -24,29 +60,33 @@ function MenuNav() {
         zIndex: 1000,
       }}
     >
-      <Link to="/tasks" style={{ textDecoration: 'none' }}>
-        <HomeIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
-      </Link>
-      
-      <Link to="/shopping" style={{ textDecoration: 'none' }}>
-        <ShoppingBagIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
-      </Link>
-      
-      <Link to="/favorite" style={{ textDecoration: 'none' }}>
-        <FavoriteBorderIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
-      </Link>
-      
-      <Link to="/tasks" style={{ textDecoration: 'none' }}>
-        <ChatIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
-      </Link>
-      
-      <Link to="/profile" style={{ textDecoration: 'none' }}>
-        <AccountCircleIcon sx={{ color: "#fff", fontSize: "2rem", '&:hover': { color: '#6e4a33' } }} />
-      </Link>
+      <NavItem
+        icon={HomeIcon}
+        isSelected={selected === "/tasks"}
+        onClick={() => handleNavigation("/tasks")}
+      />
+      <NavItem
+        icon={ShoppingBagIcon}
+        isSelected={selected === "/shopping"}
+        onClick={() => handleNavigation("/shopping")}
+      />
+      <NavItem
+        icon={FavoriteBorderIcon}
+        isSelected={selected === "/favorite"}
+        onClick={() => handleNavigation("/favorite")}
+      />
+      <NavItem
+        icon={ChatIcon}
+        isSelected={selected === "/chat"}
+        onClick={() => handleNavigation("/chat")}
+      />
+      <NavItem
+        icon={AccountCircleIcon}
+        isSelected={selected === "/profile"}
+        onClick={() => handleNavigation("/profile")}
+      />
     </Box>
   );
 }
 
 export default MenuNav;
-
-

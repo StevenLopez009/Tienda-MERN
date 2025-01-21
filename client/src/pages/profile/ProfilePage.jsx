@@ -9,6 +9,7 @@ import defaultImg from "../../assets/defaultimageperfil.webp";
 import AddIcon from "@mui/icons-material/Add";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 const ProfilePage = () => {
   const { logout, user } = useAuth();
@@ -114,24 +115,66 @@ const ProfilePage = () => {
                   display: "flex",
                   alignItems: "center",
                   gap: 1,
+                  width: "100%",
+                  height: "50px",
+                }}
+                component={Link}
+                to="/payment"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
                 }}
               >
-                <LogoutIcon fontSize="small" color="primary" />
-                <Link
-                  to="/client/public"
-                  onClick={() => logout()}
+                <CreditCardIcon fontSize="small" color="primary" />
+                <Typography
                   style={{
-                    textDecoration: "none",
-                    color: "inherit",
                     fontWeight: 500,
                   }}
                 >
-                  Logout
-                </Link>
+                  Payment Methods
+                </Typography>
               </Box>
               <ArrowForwardIosIcon fontSize="small" color="action" />
             </Box>
             <hr />
+            <Box
+              sx={{
+                marginTop: 2,
+                display: "flex",
+                width: "90%",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  width: "100%",
+                  height: "50px",
+                }}
+                component={Link}
+                to="/client/public"
+                onClick={() => logout()}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  fontWeight: 500,
+                }}
+              >
+                <LogoutIcon fontSize="small" color="primary" />
+                <Typography
+                  style={{
+                    fontWeight: 500,
+                  }}
+                >
+                  Log Out
+                </Typography>
+              </Box>
+              <ArrowForwardIosIcon fontSize="small" color="action" />
+            </Box>
           </>
         ) : (
           <img
