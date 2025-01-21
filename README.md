@@ -9,8 +9,8 @@ MERN Store es una aplicación de comercio electrónico de pila completa creada c
 🖼️ Capturas de pantalla
 
 Página de inicio
+![Página de inicio](./readmeImg/img1.jpg)
 
-![Página de inicio](https://Tienda-MERN/readmeImg/img1.jpg)
 
 
 
