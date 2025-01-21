@@ -6,20 +6,21 @@ MERN Store es una aplicación de comercio electrónico de pila completa creada c
 
 
 
-🖼️ Capturas de pantalla
+## 🖼️ Capturas de pantalla
 
-Página de inicio
-![Página de inicio](./readmeImg/img1.jpg)
+| Página de inicio                                      | Inicio de Sesion                                 |
+|-------------------------------------------------------|--------------------------------------------------------|
+| ![Página de inicio](./readmeImg/img1.jpg)             | ![Detalles del producto](./readmeImg/img2.jpg)         |
 
+| Dashboard Principal                               | Detalles de Producto                                     |
+|-------------------------------------------------------|--------------------------------------------------------|
+| ![Panel de administración](./readmeImg/img4.jpg)      | ![Carrito de compras](./readmeImg/img5.jpg)            |
 
+| Carrito de compras                              | Detalles de Producto                                     |
+|-------------------------------------------------------|--------------------------------------------------------|
+| ![Panel de administración](./readmeImg/img7.jpg)      | ![Carrito de compras](./readmeImg/img5.jpg)            |
 
-
-Detalles del producto
-
-
-
-Panel de administración
-
+---
 
 
 🛠️ Pila de tecnología
@@ -31,8 +32,6 @@ Back-end: Node.js, Express.js
 Base de datos: MongoDB
 
 Autenticación: tokens web JSON (JWT)
-
-
 
 ✨ Características
 
@@ -47,9 +46,6 @@ Panel de administración para gestionar productos, usuarios y pedidos
 Diseño para móviles 
 
 
-
-
-
 🚀 Primeros pasos
 
 Prerrequisitos
@@ -61,8 +57,6 @@ Instancia de MongoDB ejecutándose localmente o en la nube
 Instalación
 
 Clonar el repositorio:
-
-
 
 intento
 
@@ -91,7 +85,6 @@ fuente del cd  
 Instalación de npm  
 
 
-
 # Instalar dependencias del frontend  
 
 cd ../cliente
@@ -101,14 +94,10 @@ Instalación de npm  
 Configurar variables de entorno:
 
 
-
-Cambie el nombre de .env.example a .env en los directorios backend y frontend.
-
 Agregue las configuraciones necesarias (URI de MongoDB, secreto JWT, etc.).
 
+
 Ejecute la aplicación:
-
-
 
 intento
 
@@ -121,13 +110,11 @@ Editar
 npx src/index.js
 
 
-
 # Iniciar frontend  
 
 cd ../cliente 
 
 npm ejecuta dev 
-
 
 
 📄 Licencia
