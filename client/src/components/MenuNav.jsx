@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import ChatIcon from '@mui/icons-material/Chat';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -74,11 +73,6 @@ function MenuNav() {
         icon={FavoriteBorderIcon}
         isSelected={selected === "/favorite"}
         onClick={() => handleNavigation("/favorite")}
-      />
-      <NavItem
-        icon={ChatIcon}
-        isSelected={selected === "/chat"}
-        onClick={() => handleNavigation("/chat")}
       />
       <NavItem
         icon={AccountCircleIcon}

@@ -18,7 +18,23 @@ function FilterCategory({ selectedCategory, onCategoryChange }) {
   const categories = ["All", "Newest", "Popular", "Man", "Woman"];
 
   return (
-    <Box sx={{ display: "flex", gap: "8px", marginTop: "20px", overflow: "hidden" }}>
+    <Box
+      sx={{
+        display: "flex",
+        gap: "8px",
+        marginTop: "20px",
+        overflowX: "auto",
+        paddingBottom: "10px",
+        scrollbarWidth: "thin",
+        "&::-webkit-scrollbar": {
+          height: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#ccc",
+          borderRadius: "10px",
+        },
+      }}
+    >
       {categories.map((category) => (
         <Button
           key={category}
@@ -32,7 +48,7 @@ function FilterCategory({ selectedCategory, onCategoryChange }) {
   );
 }
 
-export default FilterCategory
+export default FilterCategory;
 
 
 

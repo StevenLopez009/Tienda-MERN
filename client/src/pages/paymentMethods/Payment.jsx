@@ -10,7 +10,6 @@ function PaymentMethodsPage() {
         height: "100%",
         padding: 2,
         boxSizing: "border-box",
-        backgroundColor: "#f5f5f5",
       }}
     >
       <Box
@@ -47,12 +46,12 @@ function PaymentMethodsPage() {
           marginTop: 4,
           width: "100%",
           height: 200,
-          backgroundColor: "#e0e0e0", // Fondo gris claro
+          backgroundColor: "#e0e0e0",
           borderRadius: "16px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Sombra suave
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         <Typography variant="subtitle1" color="textSecondary">
