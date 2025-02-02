@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 function Target({ product, addToCart, createFavorite, userId, deleteFavorite, isFavorited }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [open, setOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -32,6 +33,14 @@ function Target({ product, addToCart, createFavorite, userId, deleteFavorite, is
       console.log("Error Deleting favorite")
     }
   }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("Por favor, selecciona un tamaño antes de agregar al carrito.");
+      return;
+    }
+    addToCart({ ...product, selectedSize });
+  };
 
 
   return (
@@ -170,8 +179,8 @@ function Target({ product, addToCart, createFavorite, userId, deleteFavorite, is
                 </Button>
               </Box>
               <Typography variant="h6">Select Size</Typography>
-              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
-                {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+              <Box sx={{ display: "flex", gap: 2, marginTop: 2 }}>
+                {product.size.map((size) => (
                   <Box
                     key={size}
                     sx={{
@@ -183,9 +192,12 @@ function Target({ product, addToCart, createFavorite, userId, deleteFavorite, is
                       borderRadius: '5px',
                       fontWeight: 'bold',
                       fontSize: 16,
-                      backgroundColor: 'grey.100',
+                      cursor: 'pointer',
+                      backgroundColor: selectedSize === size ? '#6e4a33' : 'grey.100',
+                      color: selectedSize === size ? 'white' : 'black',
                       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
                     }}
+                    onClick={() => setSelectedSize(size)}
                   >
                     {size}
                   </Box>
@@ -230,7 +242,7 @@ function Target({ product, addToCart, createFavorite, userId, deleteFavorite, is
                     color: "white",
                     borderRadius: "50px",
                   }}
-                  onClick={() => addToCart(product)}
+                  onClick={handleAddToCart}
                 >
                   Add to Cart
                 </Button>

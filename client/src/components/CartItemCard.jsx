@@ -87,6 +87,7 @@ function CartItemCard({ item, onTotalChange, onQuantityChange }) {
         <Box sx={{ margin: "0 20px" }}>
           <Typography>{item.name}</Typography>
           <Typography>${item.price}</Typography>
+          <Typography>Size: {item.selectedSize}</Typography>
         </Box>
 
         <Box

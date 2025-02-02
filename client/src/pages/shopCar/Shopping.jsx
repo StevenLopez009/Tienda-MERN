@@ -27,7 +27,7 @@ function ShoppinPage() {
     <Box sx={{ margin: "20px 20px" }}>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: "40px" }}>
         <Link to="/tasks" style={{ textDecoration: "none", color: "inherit" }}>
-          <ArrowBackIcon sx={{ marginRight: "10px", cursor: "pointer" }} />
+          <ArrowBackIcon sx={{ marginRight: "10px" }} />
         </Link>
         <Typography
           variant="h6"
