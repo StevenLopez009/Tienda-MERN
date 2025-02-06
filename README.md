@@ -14,7 +14,7 @@ MERN Store es una aplicación de comercio electrónico de pila completa creada c
 
 | Dashboard Principal                               | Detalles de Producto                                     |
 |-------------------------------------------------------|--------------------------------------------------------|
-| ![Panel de administración](./readmeImg/img4.jpg)      | ![Carrito de compras](./readmeImg/img3.jpg)            |
+| ![Panel de administración](./readmeImg/img4.jpg)      | ![Carrito de compras](./readmeImg/img3.png)            |
 
 | Carrito de compras                              | Detalles de Producto                                     |
 |-------------------------------------------------------|--------------------------------------------------------|
