@@ -85,7 +85,7 @@ function Splash() {
           </Typography>
           <Typography sx={{ textAlign: "center", mb: 2 }}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-            beatae sed adipisci 
+            beatae sed adipisci
           </Typography>
           <Button
             type="submit"

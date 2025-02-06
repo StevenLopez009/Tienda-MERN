@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "../service/Cart.service.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";

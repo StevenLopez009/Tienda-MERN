@@ -50,6 +50,8 @@ function ShoppinPage() {
         ))}
         <Typography>Total General: ${grandTotal.toFixed(2)}</Typography>
         <Button
+          component={Link}
+          to="/payment"
           sx={{
             padding: "20px",
             margin: "0 5px",

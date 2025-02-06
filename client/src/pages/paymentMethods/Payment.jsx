@@ -1,8 +1,14 @@
 import { Box, Typography, IconButton, TextField, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function PaymentMethodsPage() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <Box
       sx={{
@@ -22,11 +28,9 @@ function PaymentMethodsPage() {
           position: "relative",
         }}
       >
-        <Link to="/profile" style={{ textDecoration: "none" }}>
-          <IconButton>
-            <ArrowBackIcon />
-          </IconButton>
-        </Link>
+        <IconButton onClick={handleBack}>
+          <ArrowBackIcon />
+        </IconButton>
         <Typography
           variant="h6"
           component="h1"
